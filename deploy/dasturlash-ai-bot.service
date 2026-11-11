@@ -1,0 +1,23 @@
+[Unit]
+Description=Dasturlash & AI Telegram Control Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=botuser
+Group=botuser
+WorkingDirectory=/opt/dasturlash_ai_bot
+EnvironmentFile=/opt/dasturlash_ai_bot/.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/dasturlash_ai_bot/.venv/bin/python -m bot.main
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/dasturlash_ai_bot/data /opt/dasturlash_ai_bot/logs
+
+[Install]
+WantedBy=multi-user.target
